@@ -1,0 +1,34 @@
+before_script:
+  - wget https://github.com/n1k0/casperjs/archive/1.0.2.tar.gz -O /tmp/casper.tar.gz
+  - tar -xvf /tmp/casper.tar.gz
+  - export PATH=$PATH:$PWD/casperjs-1.0.2/bin/
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+install: 
+  - wget https://protobuf.googlecode.com/files/protobuf-2.4.1.tar.gz
+  - tar -xzvf protobuf-2.4.1.tar.gz
+  - cd protobuf-2.4.1 && ./configure --prefix=/usr && make && make install
+before_install:
+  - ./install-protobuf.sh
+
+#before_install:
+#  - sudo apt-get update -qq
+#  - sudo apt-get install -y libxml2-dev
+#before_script:
+#  - sudo add-apt-repository ppa:rethinkdb/ppa -y
+#  - sudo apt-get update -q
+#  - sudo apt-get install rethinkdb
+#before_install:
+#  - wget http://pngquant.org/pngquant_1.7.1-1_i386.deb
+#  - sudo dpkg -i pngquant_1.7.1-1_i386.deb
+
+
+language: ruby
+rvm:
+  - 2.1.0
+#  - jruby-18mode
+#  - jruby-19mode
+#  - rbx-2
+#  - jruby-head
+#  - ree
+
